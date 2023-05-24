@@ -1,0 +1,32 @@
+.navbar {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-color: #333;
+    overflow: auto;
+}
+.navbar a:hover {
+    background-color: #471F5F;
+}
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    left: 10px;
+    text-decoration: none;
+}
+
+/* Styles pour le footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+}
