@@ -37,3 +37,4 @@ TestResults.xml
 *.ini
 vendor
 .env
+cache

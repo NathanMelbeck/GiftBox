@@ -13,6 +13,10 @@ class PrestationService {
         return Categorie::all()->toArray();
     }
 
+    public function getPrestations(): array{
+        return Prestation::all()->toArray();
+    }
+
     /**
      * @throws CategorieNotFoundException
      */

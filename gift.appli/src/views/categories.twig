@@ -5,7 +5,13 @@
 <h1>Liste des catégories</h1>
 <ul>
         {% for categorie in categories %}
-                <li><a href="{{ url_for('categoriesId', {'id': categorie.id}) }}">{{ categorie.libelle }}</a></li>
+                <a href="{{ url_for('categoriesId', {'id': categorie.id}) }}">
+                        <fieldset class="categorie">
+                                {{ categorie.libelle }}
+                                <p>{{ categorie.description }}</p>
+                        </fieldset>
+                </a>
+                <br>
         {% endfor %}
 </ul>
 {% endblock %}
