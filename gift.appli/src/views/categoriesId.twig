@@ -1,4 +1,11 @@
-<h1>Catégorie : {{ categorie.libelle }}</h1>
-<p>ID : {{ categorie.id }}</p>
-<p>Description : {{ categorie.description }}</p>
-<a href="{{ url_for('categ2prestas', {'id': categorie.id}) }}">Liste des ses presations</a>
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+
+    <h1>Catégorie : {{ categorie.libelle }}</h1>
+    <p>ID : {{ categorie.id }}</p>
+    <p>Description : {{ categorie.description }}</p>
+    <a href="{{ url_for('categ2prestas', {'id': categorie.id}) }}">Liste des ses presations</a>
+
+{% endblock %}
+

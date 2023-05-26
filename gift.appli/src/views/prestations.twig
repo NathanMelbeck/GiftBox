@@ -1,10 +1,15 @@
-<h1>Liste des catégories</h1>
-<ul>
-    {% for prestation in prestations %}
+{% extends "squelette/main.twig" %}
 
-        <li>
-            <h2>{{ prestation.libelle }}</h2>
-        <a href="{{ url_for('prestation', {'id': prestation.id}, {'id': prestation.id}) }}">Détail</a>
-        </li>
-    {% endfor %}
-</ul>
+{% block content %}
+    <h1>Liste des catégories</h1>
+    <ul>
+        {% for prestation in prestations %}
+
+            <li>
+                <h2>{{ prestation.libelle }}</h2>
+                <a href="{{ url_for('prestation', {'id': prestation.id}, {'id': prestation.id}) }}">Détail</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

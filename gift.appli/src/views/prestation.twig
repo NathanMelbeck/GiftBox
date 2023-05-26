@@ -1,5 +1,12 @@
-<h1>Prestation : {{ prestation.libelle }}</h1>
-<p>ID : {{ prestation.id }}</p>
-<p>libelle de la prestation : {{ prestation.libelle }}</p>
-<p>description : {{ prestation.description }}</p>
-<p>tarix : {{ prestation.tarif }} €</p>
+
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <h1>Prestation : {{ prestation.libelle }}</h1>
+    <p>ID : {{ prestation.id }}</p>
+    <p>libelle de la prestation : {{ prestation.libelle }}</p>
+    <p>description : {{ prestation.description }}</p>
+    <p>tarix : {{ prestation.tarif }} €</p>
+
+{% endblock %}
+
