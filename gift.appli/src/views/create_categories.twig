@@ -1,0 +1,10 @@
+<form method="post" action="/categories/create">
+    <input type="hidden" name="csrf_token" value="{{ csrfToken }}">
+    <label for="name">Nom de la catégorie</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="description">Description de la catégorie</label>
+    <input type="text" name="description" id="description">
+    <br>
+    <input type="submit" value="Créer la catégorie">
+</form>
