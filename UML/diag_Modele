@@ -1,0 +1,39 @@
+@startuml
+
+Class Box{
+  - id : String
+  - token : String
+  - libelle : String
+  - message_kdo : String
+  - description : String
+  - motant : Double
+  - kdo : int
+  - statut : int
+}
+
+Class Categorie{
+  - id : int
+  - libelle : String
+  - description : String
+}
+
+Class Prestation{
+  - id : String
+  - libelle : String
+  - description : String
+  - url : String
+  - unite : String
+  - tarif : int
+  - img : Double
+}
+Prestation "*" -right- "1" Categorie : cat_id
+
+Box "*" -left- "*" Prestation
+(Box, Prestation) . box2presta
+
+Class box2presta {
+ - quantite: int
+}
+
+
+@enduml

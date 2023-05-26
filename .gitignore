@@ -36,3 +36,4 @@ TestResults.xml
 *.idea/
 *.ini
 vendor
+.env
