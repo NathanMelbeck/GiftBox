@@ -8,8 +8,14 @@
         <a href="{{ url_for('newBoxesForm') }}">Box</a>
         <a href="{{ url_for('prestations') }}">Prestation</a>
         <a href="{{ url_for('categories') }}">Catégories</a>
+        <a href="{{ url_for('acceuil') }}">
+            <div class="logo">
+                <h>Gift Box</h>
+            </div>
+        </a>
+
         <div class="right">
-            <a href=""><i class="fas fa-shopping-cart"></i></a>
+            <a href="{{ url_for('acceuil') }}"><i class="fas fa-shopping-cart"></i></a>
         </div>
     </div>
 </head>
