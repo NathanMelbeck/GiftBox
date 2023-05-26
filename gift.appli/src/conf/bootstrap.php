@@ -9,7 +9,6 @@ use Twig\Error\LoaderError;
 
 
 $app = AppFactory::create();
-$app->addRoutingMiddleware();
 $app->addErrorMiddleware(true,false,false);
 
 $db = new DB();

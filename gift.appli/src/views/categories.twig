@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Liste des catégories</h1>
+<h1 class="text-red-500">Liste des catégories</h1>
 <ul>
         {% for categorie in categories %}
                 <a href="{{ url_for('categoriesId', {'id': categorie.id}) }}">
