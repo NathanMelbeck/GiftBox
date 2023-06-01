@@ -18,13 +18,11 @@
         <div class="right flex justify-around gap-x-6 ">
             <a class=" mx-6 hover:text-red-200" href="{{ url_for('acceuil') }}"><i class="fas fa-shopping-cart "></i></a>
 
-            {% if session['utilisateur'] is defined %}
+            {% if session.utilisateur is defined %}
                 <a class="mx-6 hover:text-red-200" href="{{ url_for('acceuil') }}"><i class="fa fa-user"></i></a>
             {% else %}
                 <a class="mx-6 hover:text-red-200" href="{{ url_for('connection') }}">Connectez-vous !</a>
             {% endif %}
-
-
 
         </div>
     </div>

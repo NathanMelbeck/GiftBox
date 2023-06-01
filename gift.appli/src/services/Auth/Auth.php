@@ -4,30 +4,17 @@ namespace gift\app\services\Auth;
 use gift\app\models\user;
 
 class Auth {
-
-    public static function register(string $login, string $pass, string $email): string {
-        $user = $_SESSION['utilisateur'] ?? null;
-
-        if ($user->tel != null) {
-            $tel = $_SESSION['telephone'];
+    /**
+     * @throws AuthException
+     */
+    function authenticate($psswrd, $mail) {
+        $user = user::where('email', $mail)->first();
+        //if (password_verify($psswrd, $user->passwd)){
+        if($psswrd == $user->passwd){
+            $_SESSION['utilisateur'] = $user;
         } else {
-            $tel = null;
+            throw new AuthException();
         }
-
-        $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
-
-        $user = new User();
-        $user->login = $login;
-        $user->pass = $pass;
-        $user->email = $email;
-        $user->nom = $nom;
-        $user->prenom = $prenom;
-        $user->tel = $tel;
-        $user->save();
-
-        // Utilisez la méthode `authenticate` d'Auth selon votre implémentation
-
-        return "Log";
     }
 
     public static function checkPasswordStrength(string $pass, int $minimumLength): bool

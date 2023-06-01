@@ -25,6 +25,7 @@ try {
     print $e->getMessage();
     die();
 }
+$twig->getEnvironment()->addGlobal('session', $_SESSION);
 $app->add(TwigMiddleware::create($app, $twig));
 
 return $app;

@@ -2,7 +2,10 @@
 
 namespace gift\app\action;
 
+use gift\app\services\Auth\Auth;
+use gift\app\services\Auth\AuthException;
 use gift\app\services\Auth\injectionException;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -27,7 +30,8 @@ class getAuthAction {
                 $email = $params['email'];
             }
         }
-
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+        $url = $routeParser->urlFor('categories');
         if(isset($params['password'])) {
             if (!filter_var($params['password'])){
                 throw new injectionException('Mauvais format de mot de passe');
@@ -35,11 +39,13 @@ class getAuthAction {
                 $psswrd = $params['password'];
             }
         }
-        session_start();
-        $_SESSION['utilisateur'] = "eheh";
-        echo $_SESSION['utilisateur'];
-        $view = Twig::fromRequest($request);
+        $auth = new Auth();
+        try {
+            $auth->authenticate($psswrd, $email);
+        } catch (AuthException $e){
+            $url = $routeParser->urlFor('connection');
+        }
 
-        return $view->render($response, 'AuthForm.twig');
+        return $response->withHeader('Location', $url)->withStatus(302);
     }
 }
