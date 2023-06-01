@@ -15,6 +15,8 @@ CREATE TABLE `box` (
   `kdo` tinyint(4) NOT NULL DEFAULT 0,
   `message_kdo` text NOT NULL DEFAULT '',
   `statut` int(11) NOT NULL DEFAULT 1,
+  `modele` int(1) NOT NULL DEFAULT 1,
+  `email` varchar(256) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -47,6 +49,18 @@ CREATE TABLE `prestation` (
   `tarif` decimal(10,2) NOT NULL,
   `img` varchar(128) NOT NULL,
   `cat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+    `login` varchar(20) NOT NULL,
+    `passwd` varchar(256) NOT NULL,
+    `email` varchar(256) NOT NULL,
+    `nomUser` varchar(20) DEFAULT NULL,
+    `prenomUser` varchar(20) DEFAULT NULL,
+    `tel` varchar(20) DEFAULT NULL,
+    `token` varchar(50) DEFAULT NULL,
+    `privilege` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

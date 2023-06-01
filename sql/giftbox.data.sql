@@ -5,6 +5,8 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+INSERT INTO `user` (`login`, `passwd`, `email`, `privilege`) VALUES ('admin', 'admin', 'admin@gmail.com', 1);
+
 INSERT INTO `box` (`id`, `token`, `libelle`, `description`, `montant`, `kdo`, `message_kdo`, `statut`, `created_at`, `updated_at`) VALUES
 ('360bb4cc-e092-3f00-9eae-774053730cb2',	'twmyDtNlmtC0hsxZ6fEw0+maTTfrDEqNH0gjBhTo3BI=',	'quos dolorem libero',	'Quisquam a eaque eum ipsa est est. Nemo eveniet dolorum nisi. Voluptatem dolores veritatis tempore unde recusandae. Numquam at qui odio voluptas inventore non vel.',	173.00,	1,	'Sit omnis in ut rerum. Odit exercitationem et omnis voluptatum aut numquam rerum. Explicabo dolor corrupti similique exercitationem et accusantium voluptas.',	5,	'2023-04-07 14:27:32',	'2023-04-07 14:27:32'),
 ('6cc74b9f-43bc-3f63-a9c4-9158ad83f379',	'3UWreyfDfcLHNiduEVuyrs1JuGY079K+ofIB0oBqttE=',	'eum quasi qui',	'Vel voluptatum veritatis aperiam omnis ad neque est. Temporibus quis et molestiae aut et nesciunt. Quis occaecati architecto quo consequatur reprehenderit aperiam quidem vel. Eum et et omnis.',	40.00,	1,	'Quaerat sit assumenda facere. Cum ut et iste deserunt corporis quidem aliquid. Suscipit ducimus qui dolores omnis delectus suscipit. Aliquid eius reiciendis omnis assumenda illo autem velit.',	2,	'2023-04-07 14:27:32',	'2023-04-07 14:27:32'),
