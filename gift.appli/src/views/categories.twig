@@ -1,17 +1,27 @@
 {% extends "squelette/main.twig" %}
 
+
 {% block content %}
 
-<h1 class="text-red-500">Liste des catégories</h1>
+<h1 class="">Liste des catégories</h1>
 <ul>
+<div class="flex flex-col gap-4 text-center ">
         {% for categorie in categories %}
-                <a href="{{ url_for('categoriesId', {'id': categorie.id}) }}">
+        <div class="bg-violet-300 mx-8 my-4 p-4 rounded-lg hover:bg-violet-200">
+                <a  href="{{ url_for('categoriesId', {'id': categorie.id}) }}">
+
+
                         <fieldset class="categorie">
                                 {{ categorie.libelle }}
-                                <p>{{ categorie.description }}</p>
+                                <fieldset><p > {{ categorie.description }}</p></fieldset>
                         </fieldset>
+
                 </a>
                 <br>
+                </div>
+
         {% endfor %}
+         </div>
 </ul>
 {% endblock %}
+
