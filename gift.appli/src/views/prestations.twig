@@ -1,15 +1,25 @@
 {% extends "squelette/main.twig" %}
 
+
+
+
 {% block content %}
-    <h1>Liste des catégories</h1>
+<div>
+    <h1>Catalogue</h1>
+    <select name="genre[]" size="3" multiple="multiple">
+
+</div>
+    <div class="grid grid-rows-3">
     <ul>
         {% for prestation in prestations %}
-
+            <div>
             <li>
                 <h2>{{ prestation.libelle }}</h2>
                 <a href="{{ url_for('prestation', {'id': prestation.id}, {'id': prestation.id}) }}">Détail</a>
             </li>
+            </div>
         {% endfor %}
     </ul>
+    </div>
 {% endblock %}
 
