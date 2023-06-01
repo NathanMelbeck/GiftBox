@@ -3,8 +3,10 @@
 namespace gift\app\conf;
 
 use gift\app\action\getAcceuilAction;
+use gift\app\action\getAuthAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
+use gift\app\action\getFormAuthAction;
 use gift\app\action\getNewBoxe;
 use gift\app\action\getNewBoxeForm;
 use gift\app\action\getPrestation;
@@ -29,4 +31,12 @@ return function (\Slim\App $app): void {
         ->setName('categ2prestas');
     $app->get('/prestations', getPrestationsAction::class)
         ->setName('prestations');
+
+    //route pour les connections
+    $app->get('/connection', getFormAuthAction::class)
+        ->setName('connection');
+    $app->post('/connection', getAuthAction::class)
+        ->setName('connection');
+    $app->get('/register', getFormAuthAction::class)
+        ->setName('register');
 };
