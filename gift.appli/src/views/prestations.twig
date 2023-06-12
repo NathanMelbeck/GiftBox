@@ -7,15 +7,27 @@
 <div>
     <h1>Catalogue</h1>
     <select name="genre[]" size="3" multiple="multiple">
+        {% for categorie in categories %}
+            <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
+        {% endfor %}
+    </select>
+
+    <div>
+    <form methode="GET" action="{{ url_for('prestations') }}">
+        <button type="submit" value="desc" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500" >Tri Croissant</button>
+        <button type="submit" value="desc" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500" >Tri Décroissant</button>
+            </form>
+    </div>
+
 
 </div>
-    <div class="grid grid-rows-3">
+    <div class="my-4">
     <ul>
         {% for prestation in prestations %}
-            <div>
+            <div class="bg-violet-300 my-4 mx-6 rounded-lg">
             <li>
                 <h2>{{ prestation.libelle }}</h2>
-                <a href="{{ url_for('prestation', {'id': prestation.id}, {'id': prestation.id}) }}">Détail</a>
+                <a href="{{ url_for('prestation', {'id': prestation.id, 'tarif': prestation.tarif}) }}">Détail</a>
             </li>
             </div>
         {% endfor %}
