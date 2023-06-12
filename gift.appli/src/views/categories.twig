@@ -5,23 +5,19 @@
 
 <h1 class="">Liste des catégories</h1>
 <ul>
-<div class="flex flex-col gap-4 text-center ">
-        {% for categorie in categories %}
-        <div class="bg-violet-300 mx-8 my-4 p-4 rounded-lg hover:bg-violet-200">
-                <a  href="{{ url_for('categoriesId', {'id': categorie.id}) }}">
-
-
+    <div class="flex flex-col gap-4 text-center ">
+            {% for categorie in categories %}
+                <div class="bg-violet-300 mx-8 my-4 p-4 rounded-lg hover:bg-violet-200">
+                    <a  href="{{ url_for('categ2prestas', {'id': categorie.id}) }}">
                         <fieldset class="categorie">
-                               <fieldset> <H1 class="py-2 bg-white text-2xl mx-4 rounded-lg capitalize font-mono font-bold text-left"> {{ categorie.libelle }} </H1> </fieldset>
-                                <fieldset><p class="bg-white mt-4 p-8 rounded-lg" > {{ categorie.description }}</p></fieldset>
+                            <fieldset> <H1 class="py-2 bg-white text-2xl mx-4 rounded-lg capitalize font-mono font-bold text-left"> {{ categorie.libelle }} </H1> </fieldset>
+                            <fieldset><p class="bg-white mt-4 p-8 rounded-lg" > {{ categorie.description }}</p></fieldset>
                         </fieldset>
-
-                </a>
-                <br>
+                    </a>
+                    <br>
                 </div>
-
-        {% endfor %}
-         </div>
+            {% endfor %}
+    </div>
 </ul>
 {% endblock %}
 
