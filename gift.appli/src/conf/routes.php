@@ -7,11 +7,13 @@ use gift\app\action\getAuthAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
 use gift\app\action\getFormAuthAction;
+use gift\app\action\getFormRegisterAction;
 use gift\app\action\getNewBoxe;
 use gift\app\action\getNewBoxeForm;
 use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
 use gift\app\action\GetPrestationsByCategorieAction;
+use gift\app\action\getRegisterAction;
 
 
 return function (\Slim\App $app): void {
@@ -37,6 +39,8 @@ return function (\Slim\App $app): void {
         ->setName('connection');
     $app->post('/connection', getAuthAction::class)
         ->setName('connection');
-    $app->get('/register', getFormAuthAction::class)
+    $app->get('/register', getFormRegisterAction::class)
+        ->setName('register');
+    $app->post('/register', getRegisterAction::class)
         ->setName('register');
 };
