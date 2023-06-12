@@ -18,13 +18,16 @@ class getPrestationsAction {
      */
     public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response): \Psr\Http\Message\ResponseInterface {
         $prestationService = new PrestationService();
-        $categories= $prestationService->getPrestations();
+        $categories= $prestationService->getCategories();
+        $asc = isset($_GET['asc']);
+
+        $prestations = $prestationService->getPrestations($asc);
 
         $view = Twig::fromRequest($request);
 
         return $view->render($response,
             'prestations.twig',
-            ['prestations' => $categories]
+            ['prestations' => $prestations, 'categories' => $categories]
         );
     }
 }
