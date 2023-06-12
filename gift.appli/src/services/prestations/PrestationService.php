@@ -13,8 +13,14 @@ class PrestationService {
         return Categorie::all()->toArray();
     }
 
-    public function getPrestations(): array{
-        return Prestation::all()->toArray();
+    public function getPrestations($asc = true): array{
+        $prests = Prestation::all()->toArray();
+        if ($asc)
+            $prests = Prestation::orderBy('tarif')->get()->toArray();
+       else
+           //tarif décroissant
+            $prests = Prestation::orderBy('tarif', 'desc')->get()->toArray();
+            return $prests;
     }
 
     /**
