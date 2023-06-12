@@ -18,7 +18,8 @@ class getCategoryCreateProcessAction
         try {
             CsrfService::check($token);
         } catch (\Exception $e) {
-            throw new HttpBadRequestException($rq, 'csrf token error ' . $token . ' session ' . $token2);
+            throw new HttpBadRequestException($rq, 'csrf token error');
+        }
 
         $categ_data = [
             'name' => $post_data['categ_lib'] ?? null,
