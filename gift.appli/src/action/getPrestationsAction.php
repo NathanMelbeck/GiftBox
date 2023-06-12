@@ -21,14 +21,14 @@ class getPrestationsAction {
         $categories = $prestationService->getCategories();
 
         $value = isset($_GET['value']) ? $_GET['value'] : 'desc';
-        echo $value;
+
         $prestations = $prestationService->getPrestations($value);
 
         $view = Twig::fromRequest($request);
 
         return $view->render($response,
             'prestations.twig',
-            ['prestations' => $prestations, 'categories' => $categories]
+            ['prestations' => $prestations, 'categories' => $categories, 'value' => $value, 'urlName' => 'prestations']
         );
     }
 
