@@ -91,14 +91,17 @@ class PrestationService {
     public function addCategorie(array $categ_data): void
     {
         try {
-            if ($categ_data['name'] != filter_var($categ_data['name'], FILTER_SANITIZE_STRING)) {
+            if ($categ_data['name'] != filter_var($categ_data['name'])) {
                 throw new PrestationServiceBadDataException('Nom invalide');
             }
-            if ($categ_data['description'] != filter_var($categ_data['description'], FILTER_SANITIZE_STRING)) {
+            if ($categ_data['description'] != filter_var($categ_data['description'])) {
                 throw new PrestationServiceBadDataException('Description invalide');
             }
 
-            $categorie = new Categorie($categ_data);
+            $categorie = new Categorie();
+            var_dump($categ_data);
+            $categorie->libelle = $categ_data['name'];
+            $categorie->description = $categ_data['description'];
             $categorie->save();
         } catch (ModelNotFoundException $exception) {
             throw new PrestationNotFoundException('Categorie non trouvée', 404);
