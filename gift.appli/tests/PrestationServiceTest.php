@@ -24,12 +24,12 @@ final class PrestationServiceTest extends TestCase
         $db->bootEloquent();
         $faker = \Faker\Factory::create('fr_FR');
 
-        $c1= Categorie::create([
-            'libelle' => $faker->word(),
+        $c1= Categorie::addCategorie([
+            'name' => $faker->word(),
             'description' => $faker->paragraph(3)
         ]);
-        $c2=Categorie::create([
-            'libelle' => $faker->word(),
+        $c2=Categorie::addCategorie([
+            'name' => $faker->word(),
             'description' => $faker->paragraph(4)
         ]);
         self::$categories= [$c1, $c2];
