@@ -88,12 +88,23 @@ class PrestationService {
         }
     }
 
-    public function addCategorie() : int {
-        $categorie = new Categorie();
-        $categorie->libelle = 'Nouvelle catégorie';
-        $categorie->save();
-        return $categorie->id;
+    public function addCategorie(array $categ_data): void
+    {
+        try {
+            if ($categ_data['name'] != filter_var($categ_data['name'], FILTER_SANITIZE_STRING)) {
+                throw new PrestationServiceBadDataException('Nom invalide');
+            }
+            if ($categ_data['description'] != filter_var($categ_data['description'], FILTER_SANITIZE_STRING)) {
+                throw new PrestationServiceBadDataException('Description invalide');
+            }
+
+            $categorie = new Categorie($categ_data);
+            $categorie->save();
+        } catch (ModelNotFoundException $exception) {
+            throw new PrestationNotFoundException('Categorie non trouvée', 404);
+        }
     }
+
 
     /**
      * @throws PrestationNotFoundException
