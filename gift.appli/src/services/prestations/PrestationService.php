@@ -44,13 +44,24 @@ class PrestationService {
     /**
      * @throws PrestationByCategorieNotFoundException
      */
-    public function getPrestationsbyCategorie(int $categ_id):array{
+    public function getPrestationsByCategorie(int $categ_id, string $trie): array
+    {
         try {
-            return Prestation::where('cat_id', $categ_id)->get()->toArray();
-        } catch (ModelNotFoundException $e){
+            $query = Prestation::where('cat_id', $categ_id);
+
+            if ($trie === 'asc') {
+                $query->orderBy('libelle', 'asc');
+            } elseif ($trie === 'desc') {
+                $query->orderBy('libelle', 'desc');
+            }
+
+            return $query->get()->toArray();
+        } catch (ModelNotFoundException $e) {
             throw new PrestationByCategorieNotFoundException('ID non existante');
         }
     }
+
+
 
     /**
      * @throws PrestationNotFoundException
