@@ -10,12 +10,9 @@ class Auth {
     function authenticate($psswrd, $mail) {
         $user = user::where('email', $mail)->first();
         if (password_verify($psswrd, $user->passwd)) {
-
-            if ($psswrd == $user->passwd) {
-                $_SESSION['utilisateur'] = $user;
-            } else {
-                throw new AuthException();
-            }
+            $_SESSION['utilisateur'] = $user;
+        } else {
+            throw new AuthException();
         }
     }
 
@@ -51,7 +48,4 @@ class Auth {
     private function dejaPresent($email) {
         return User::where('email', $email)->exists();
     }
-
-
-
 }
