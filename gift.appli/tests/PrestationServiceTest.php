@@ -5,7 +5,7 @@ namespace gift\test\services\prestations;
 
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
-use gift\app\services\prestations\PrestationsService;
+use gift\app\services\prestations\PrestationService;
 use \PHPUnit\Framework\TestCase;
 use Illuminate\Database\Capsule\Manager as DB ;
 
@@ -69,7 +69,7 @@ final class PrestationServiceTest extends TestCase
 
     public function testgetCategories(): void {
 
-        $prestationService = new PrestationsService();
+        $prestationService = new PrestationService();
         $categories = $prestationService->getCategories();
 
         $this->assertEquals(count(self::$categories), count($categories));
@@ -83,19 +83,19 @@ final class PrestationServiceTest extends TestCase
 
     public function testgetCategorieById(): void {
 
-        $prestationService = new PrestationsService();
+        $prestationService = new PrestationService();
         $categorie = $prestationService->getCategorieById(self::$categories[0]['id']);
 
         $this->assertEquals(self::$categories[0]['id'], $categorie['id']);
         $this->assertEquals(self::$categories[0]['libelle'], $categorie['libelle']);
         $this->assertEquals(self::$categories[0]['description'], $categorie['description']);
 
-        $this->expectException(\gift\app\services\prestations\PrestationsServiceNotFoundException::class);
+        $this->expectException(\gift\app\services\prestations\PrestationNotFoundException::class);
         $prestationService->getCategorieById(-1);
     }
     public function testgetPrestationById(): void
     {
-        $prestationService = new PrestationsService();
+        $prestationService = new PrestationService();
         $prestation = $prestationService->getPrestationById(self::$prestations[0]['id']);
 
         $this->assertEquals(self::$prestations[0]['id'], $prestation['id']);
@@ -104,7 +104,7 @@ final class PrestationServiceTest extends TestCase
         $this->assertEquals(self::$prestations[0]['tarif'], $prestation['tarif']);
         $this->assertEquals(self::$prestations[0]['unite'], $prestation['unite']);
 
-        $this->expectException(\gift\app\services\prestations\PrestationsServiceNotFoundException::class);
+        $this->expectException(\gift\app\services\prestations\PrestationNotFoundException::class);
         $prestationService->getPrestationById('AAAAAAA');
     }
 
