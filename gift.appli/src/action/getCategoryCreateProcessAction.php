@@ -13,10 +13,12 @@ class getCategoryCreateProcessAction
         $post_data = $rq->getParsedBody();
 
         $token = $post_data['csrf_token'] ?? null;
+        $token2 = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : 'hihi';
+
         try {
             CsrfService::check($token);
         } catch (\Exception $e) {
-            throw new HttpBadRequestException($rq, 'csrf token error');
+            throw new HttpBadRequestException($rq, 'csrf token error ' . $token . ' session ' . $token2);
         }
 
         $categ_data = [
