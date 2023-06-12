@@ -22,6 +22,10 @@ return function (\Slim\App $app): void {
         ->setName('acceuil');
     $app->get('/categories[/]', GetCategoriesAction::class)
         ->setName('categories');
+    $app->get('/categories/create[/]', getNewCategoriesForm::class)
+        ->setName('categForm');
+    $app->post('/categories/create[/]', getCategoryCreateProcessAction::class)
+        ->setName('categCreate');
     $app->get('/categorie/{id:\d+}[/]', getCategorieById::class)
         ->setName('categoriesId');
     $app->get('/prestation', getPrestation::class)

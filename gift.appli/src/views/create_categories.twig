@@ -1,10 +1,14 @@
-<form method="post" action="/categories/create">
-    <input type="hidden" name="csrf_token" value="{{ csrfToken }}">
-    <label for="name">Nom de la catégorie</label>
-    <input type="text" name="name" id="name">
-    <br>
-    <label for="description">Description de la catégorie</label>
-    <input type="text" name="description" id="description">
-    <br>
-    <input type="submit" value="Créer la catégorie">
+{% extends "squelette/main.twig" %}
+{% block content %}
+<h2>Créer une catégorie</h2>
+<form class="gift_form" method="post" action="/categories/create">
+    <label for="categ_lib_input">Nom de la catégorie</label>
+    <input type="text" name="categ_lib" id="categ_lib_input" required placeholder="Nom de la catégorie">
+    <label for="categ_desc_input">Déscription de la catégorie</label>
+    <input type="text" name="categ_desc" id="categ_desc_input" required placeholder="Description de la catégorie">
+
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit">Créer la catégorie</button>
 </form>
+
+{% endblock %}
