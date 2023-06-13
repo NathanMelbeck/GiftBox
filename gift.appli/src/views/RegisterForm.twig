@@ -1,0 +1,44 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <fieldset class="bg-violet-300 mx-8 my-4 p-4 rounded-lg">
+        <form method="POST" action="/register">
+            <table class="my-4">
+                <tr>
+                    <td><label for="email">Email :</label></td>
+                    <td><input type="email" name="email" id="email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Mot de passe :</label></td>
+                    <td><input type="password" name="password" id="password" required></td>
+                </tr>
+                <tr>
+                    <td><label for="confirm_password">Confirmer le mot de passe :</label></td>
+                    <td><input type="password" name="confirm_password" id="confirm_password" required></td>
+                </tr>
+                <tr>
+                    <td><label for="login">Login :</label></td>
+                    <td><input type="text" name="login" id="login"></td>
+                </tr>
+                <tr>
+                    <td><label for="nom">Nom :</label></td>
+                    <td><input type="text" name="nom" id="nom"></td>
+                </tr>
+                <tr>
+                    <td><label for="prenom">Prénom :</label></td>
+                    <td><input type="text" name="prenom" id="prenom"></td>
+                </tr>
+                <tr>
+
+                    <td><label for="telephone">Téléphone :</label></td>
+                    <td><input type="tel" name="telephone" id="telephone"></td>
+                </tr>
+            </table>
+            <br class="my-4">
+            <button class="bg-violet-400 mx-8 my-4 p-4 rounded-lg" type="submit">S'enregistrer</button>
+        </form>
+    </fieldset>
+
+{% endblock %}
+
+

@@ -11,11 +11,11 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class getAcceuilAction {
+class getFormRegisterAction {
 
     public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response): \Psr\Http\Message\ResponseInterface {
-        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('categories');
-        return $response->withHeader('Location', $url)->withStatus(302);
+        $view = Twig::fromRequest($request);
+
+        return $view->render($response, 'RegisterForm.twig');
     }
 }
