@@ -40,6 +40,8 @@ return function (\Slim\App $app): void {
         ->setName('prestations');
     $app->get('/boxes', getBoxesAction::class)
         ->setName('boxes');
+    $app->get('/boxes', getBoxesAction::class)
+        ->setName('boxes');
     $app->get('/panier', getPanierAction::class)
         ->setName('panier');
 
