@@ -14,6 +14,7 @@ class getNewBoxe
         $description = $params['description'] ?? '';
 
         $box = new Box();
+        $box->id = Uuid::uuid4()->toString();
         $box->libelle = $name;
         $box->description = $description;
 
