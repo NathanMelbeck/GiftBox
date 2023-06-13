@@ -3,15 +3,18 @@
 namespace gift\app\conf;
 
 use gift\app\action\getAcceuilAction;
+use gift\app\action\getAuthAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
-use gift\app\action\getCategoryCreateProcessAction;
+use gift\app\action\getFormAuthAction;
+use gift\app\action\getFormRegisterAction;
 use gift\app\action\getNewBoxe;
 use gift\app\action\getNewBoxeForm;
-use gift\app\action\getNewCategoriesForm;
+use gift\app\action\getPanierAction;
 use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
 use gift\app\action\GetPrestationsByCategorieAction;
+use gift\app\action\getRegisterAction;
 
 
 return function (\Slim\App $app): void {
