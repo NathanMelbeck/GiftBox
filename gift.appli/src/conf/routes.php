@@ -10,6 +10,7 @@ use gift\app\action\getFormAuthAction;
 use gift\app\action\getFormRegisterAction;
 use gift\app\action\getNewBoxe;
 use gift\app\action\getNewBoxeForm;
+use gift\app\action\getPanierAction;
 use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
 use gift\app\action\GetPrestationsByCategorieAction;
@@ -33,6 +34,8 @@ return function (\Slim\App $app): void {
         ->setName('categ2prestas');
     $app->get('/prestations', getPrestationsAction::class)
         ->setName('prestations');
+    $app->get('/panier', getPanierAction::class)
+        ->setName('panier');
 
     //route pour les connections
     $app->get('/connection', getFormAuthAction::class)

@@ -19,7 +19,7 @@ class getCategoriesAction {
     public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response): \Psr\Http\Message\ResponseInterface {
         $prestationService = new PrestationService();
         $categories= $prestationService->getCategories();
-        unset($_SESSION['utilisateur']);
+
         $view = Twig::fromRequest($request);
 
         return $view->render($response,

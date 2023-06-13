@@ -21,7 +21,8 @@ class getPrestation {
                  $response->getBody()->write("<h1>{$e->getMessage()}");
                  return $response;
             }
-
+            $categ = $prestationService->getCategorieById($prestation['cat_id']);
+            $prestation['cat_id'] = $categ['libelle'];
 
             $data = [
                 'prestation' => $prestation,
