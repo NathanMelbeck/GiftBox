@@ -31,6 +31,7 @@ class getNewBoxe
         $box->token = $token;
         $box->libelle = $name;
         $box->description = $description;
+        $box->modele=0;
         $box->save();
 
         $data = [
