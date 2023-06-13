@@ -3,6 +3,7 @@
 namespace gift\app\conf;
 
 use gift\app\action\getAcceuilAction;
+use gift\app\action\GetBoxesAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
 use gift\app\action\getCategoryCreateProcessAction;
@@ -35,4 +36,6 @@ return function (\Slim\App $app): void {
         ->setName('categ2prestas');
     $app->get('/prestations', getPrestationsAction::class)
         ->setName('prestations');
+    $app->get('/boxes', getBoxesAction::class)
+        ->setName('boxes');
 };
