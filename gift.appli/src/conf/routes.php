@@ -10,6 +10,7 @@ use gift\app\action\getCategoriesAction;
 use gift\app\action\getCategoryCreateProcessAction;
 use gift\app\action\getFormAuthAction;
 use gift\app\action\getFormRegisterAction;
+use gift\app\Action\getModeleBoxAction;
 use gift\app\action\getNewBoxe;
 use gift\app\action\getNewBoxeForm;
 use gift\app\action\getNewCategoriesForm;
@@ -45,6 +46,8 @@ return function (\Slim\App $app): void {
         ->setName('boxes');
     $app->get('/panier', getPanierAction::class)
         ->setName('panier');
+    $app->get('/modeleBox', getModeleBoxAction::class)
+        ->setName('modeleBox');
 
     //route pour les connections
     $app->get('/connection', getFormAuthAction::class)
