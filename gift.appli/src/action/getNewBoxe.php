@@ -15,15 +15,15 @@ class getNewBoxe
         $params = $request->getParsedBody();
         $name = $params['name'] ?? '';
         $description = $params['description'] ?? '';
-        $token = $params['csrf_token'] ?? null;
-        $token2 = $_SESSION['csrf_token'] ?? '';
+        var_dump($params);
 
-        if ($token !== null && is_string($token)) {
-            try {
-                CsrfService::check($token);
-            } catch (\Exception $e) {
-                throw new HttpBadRequestException($request, 'CSRF token error');
-            }
+        $token = $params['csrf_token'] ?? null;
+        $token2 = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : 'hihi';
+
+        try {
+            CsrfService::check($token);
+        } catch (\Exception $e) {
+            throw new HttpBadRequestException($request, 'csrf token error ' . $token . ' session ' . $token2);
         }
 
         $box = new Box();
@@ -38,7 +38,8 @@ class getNewBoxe
             'description' => $description
         ];
 
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'newBox.twig', $data);
+        $routeParser = \Slim\Routing\RouteContext::fromRequest($request)->getRouteParser();
+        $url = $routeParser->urlFor('boxes');
+        return $response->withHeader('Location', $url)->withStatus(302);
     }
 }
