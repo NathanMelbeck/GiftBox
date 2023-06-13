@@ -3,6 +3,7 @@
 namespace gift\app\action;
 
 use gift\app\services\prestations\BoxService;
+use gift\app\services\Utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
@@ -17,7 +18,12 @@ class GetBoxesAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view = Twig::fromRequest($request);
+        $csrfToken = CsrfService::generate();
 
-        return $view->render($response, 'boxes.twig');
+        $templateData = [
+            'csrf_token' => $csrfToken
+        ];
+
+        return $view->render($response, 'boxes.twig', $templateData);
     }
 }
