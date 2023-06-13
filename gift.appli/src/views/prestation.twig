@@ -1,12 +1,56 @@
-
 {% extends "squelette/main.twig" %}
 
 {% block content %}
-    <h1>Prestation : {{ prestation.libelle }}</h1>
-    <p>ID : {{ prestation.id }}</p>
-    <p>libelle de la prestation : {{ prestation.libelle }}</p>
-    <p>description : {{ prestation.description }}</p>
-    <p>tarix : {{ prestation.tarif }} €</p>
+    <div class="container mx-auto py-8 flex">
+        <div class="w-1/2">
+            <img src="{{ base_path() }}/img/{{ prestation.img }}" alt="Product Image" class="w-full">
+        </div>
+        <div class="w-1/2 pl-8 mx-4 px-4 bg-auto rounded-lg">
+            <h1 class="text-2xl font-bold mb-2">{{ prestation.libelle }}</h1>
+            <hr class="my-4">
+            <p class="text-gray-800 mb-4">Tarif : {{ prestation.tarif }} €<br>Tous les prix incluent la TVA.</p>
+            <hr class="my-4">
+            <table class="border border-white">
+                <tbody>
+                {% if prestation.unite %}
+                    <tr>
+                        <td class="font-medium px-4 py-2">Unité</td>
+                        <td class="border border-gray px-4 py-2">{{ prestation.unite }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td class="font-medium 300 px-4 py-2">Catégorie</td>
+                    <td class="border border-gray px-4 py-2">{{ prestation.cat_id }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hr class="my-4">
+            <div class="flex items-center mt-4">
+                <label for="quantity" class="mr-2">Quantité :</label>
+                <select id="quantity" name="quantity" class="mx-4 px-4 border border-gray-300">
+                    {% for i in 1..30 %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <p class="mt-4" id="total-price"></p>
+            <hr>
+            <button class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500">
+                Ajouter au panier</button>
 
+
+        </div>
+    </div>
+
+    <script>
+        const quantitySelect = document.getElementById('quantity');
+        const totalPriceElement = document.getElementById('total-price');
+        const pricePerUnit = {{ prestation.tarif }};
+
+        quantitySelect.addEventListener('change', (event) => {
+            const quantity = event.target.value;
+            const totalPrice = pricePerUnit * quantity;
+            totalPriceElement.innerText = `Prix total pour la quantité suivante : ${totalPrice} €`;
+        });
+    </script>
 {% endblock %}
-

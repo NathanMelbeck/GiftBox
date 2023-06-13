@@ -1,36 +1,30 @@
 {% extends "squelette/main.twig" %}
 
-
-
-
 {% block content %}
     <div>
         <h1 class="text-2xl font-bold my-4 text-center font-sans tracking-wider">Catalogue</h1>
 
         <div>
             <form method="GET" action="{{ url_for(urlName, {'id': categoryId} ,{'id': prestation.id, 'categoryId': categoryId}) }}">
-                <div class="bg-violet-200 rounded-lg p-4 flex flex-col px-4 shadow-lg">
-                {% if value == 'desc' %}
-                    <button type="submit" name="value" value="asc"
-                            class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500" >
-                        Trie : Prix Croissant
-                    </button>
-                {% else %}
-                    <button type="submit" name="value" value="desc"
-                            class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500" >
-                        Trie : Prix Décroissant
-                    </button>
-                {% endif %}
+                <div class="bg-violet-200 rounded-lg p-4 flex flex-col px-4">
+                    {% if value == 'desc' %}
+                        <button type="submit" name="value" value="asc"
+                                class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500" >
+                            Trie : Prix Croissant
+                        </button>
+                    {% else %}
+                        <button type="submit" name="value" value="desc"
+                                class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500" >
+                            Trie : Prix Décroissant
+                        </button>
+                    {% endif %}
                 </div>
             </form>
-
         </div>
-
-
     </div>
     <div class="my-4 grid grid-cols-3 gap-4 px-4">
         {% for prestation in prestations %}
-            <div class="bg-violet-300 rounded-lg p-4 flex flex-col px-4 shadow-lg">
+            <div class="shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4">
                 <div class="flex justify-between items-center">
                     <div>
                         <h2 class="text-lg font-bold">{{ prestation.libelle }}</h2>
@@ -40,14 +34,17 @@
                 </div>
                 <img src="{{ base_path() }}/img/{{ prestation.img }}" alt="{{ prestation.description }}" class="w-full h-auto mt-4">
                 <p class="mt-4">{{ prestation.description }}</p>
-                <a href="{{ url_for('prestation', {'id': prestation.id}) }}" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500">
+                <a href="{{ url_for('prestation', {'id': prestation.id},{'id': prestation.id}) }}" class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500">
                     Détail
                 </a>
             </div>
         {% endfor %}
     </div>
-
+    <style>
+        .shadow-2xl:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 
 
 {% endblock %}
-

@@ -1,12 +1,27 @@
 <html>
-    {% include "squelette/header.twig" %}
-    <body>
-        <br>
-        <div class="content">
-            {% block content %} {% endblock %}
-        </div>
-        <br>
-        <br>
-    </body>
-    {% include "squelette/footer.twig" %}
+{% include "squelette/header.twig" %}
+<head>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: whitesmoke;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+<br>
+<div class="content">
+    {% block content %} {% endblock %}
+</div>
+<br>
+<br>
+</body>
+{% include "squelette/footer.twig" %}
 </html>

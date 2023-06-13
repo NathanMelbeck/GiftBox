@@ -1,0 +1,75 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+<div class="cart">
+    <h2 class="cart__title text-2xl font-bold mb-4">Votre Panier</h2>
+    <div class="cart__items">
+        {% if cartItems is empty %}
+            <p class="cart__empty text-gray-600">Votre panier est vide.</p>
+        {% else %}
+            {% for item in cartItems %}
+                <div class="cart__item flex items-center py-4 border-b border-gray-200">
+                    <img src="{{ item.image }}" alt="{{ item.title }}" class="cart__item-image w-20 h-20 mr-4">
+                    <div class="cart__item-details">
+                        <h3 class="cart__item-title text-lg font-semibold mb-1">{{ item.title }}</h3>
+                        <p class="cart__item-price text-gray-600 mb-1">{{ item.price }} €</p>
+                        <p class="cart__item-quantity text-gray-600">Quantité : {{ item.quantity }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="cart__total mt-4 mx-4 my-4 py-4">
+        <p class="cart__total-price text-lg font-semibold py-4">Total : {{ cartTotal }} €</p>
+        <a href="{{ checkoutUrl }}" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500">Passer à la caisse</a>
+    </div>
+</div>
+<style>
+    .cart {
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart__title {
+        color: #333;
+    }
+
+    .cart__empty {
+        color: #888;
+    }
+
+    .cart__item {
+        align-items: center;
+    }
+
+    .cart__item-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .cart__item-details {
+        flex: 1;
+    }
+
+    .cart__item-title {
+        color: #333;
+    }
+
+    .cart__item-price,
+    .cart__item-quantity {
+        color: #888;
+        margin-bottom: 0.5rem;
+    }
+
+    .cart__total {
+        margin-top: 2rem;
+    }
+
+    .cart__total-price {
+        color: #333;
+    }
+
+</style>
+{% endblock %}
