@@ -1,14 +1,16 @@
 <?php
 declare(strict_types=1);
 
-
-namespace gift\test\services\prestations;
+namespace gift\tests\services\prestations;
 
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
 use gift\app\services\prestations\PrestationService;
 use \PHPUnit\Framework\TestCase;
 use Illuminate\Database\Capsule\Manager as DB ;
+
+require_once __DIR__ . '/../../../src/vendor/autoload.php';
+
 
 final class PrestationServiceTest extends TestCase
 {
