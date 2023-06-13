@@ -18,12 +18,7 @@ class GetBoxesAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        $csrfToken = CsrfService::generate();
 
-        $templateData = [
-            'csrf_token' => $csrfToken
-        ];
-
-        return $view->render($response, 'boxes.twig', $templateData);
+        return $view->render($response, 'boxes.twig');
     }
 }
