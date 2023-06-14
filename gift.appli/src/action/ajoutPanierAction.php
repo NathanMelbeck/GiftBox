@@ -48,10 +48,12 @@ class ajoutPanierAction {
             if (isset($_SESSION['BoxCourante'])){
                 $boxService = new BoxService();
                 $boxService->insertBoxPresta($_SESSION['BoxCourante'], $_SESSION['panier']);
+                $boxService->updateTotalBox($_SESSION['BoxCourante'], $cartTotal);
             }
 
         }
         $_SESSION['cartTotal'] = $cartTotal;
+
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $url = $routeParser->urlFor('panier');
         return $response->withHeader('Location', $url)->withStatus(302);

@@ -2,7 +2,6 @@
 
 namespace gift\app\action;
 
-use gift\app\services\prestations\BoxService;
 use Slim\Views\Twig;
 
 class getPanierAction {
