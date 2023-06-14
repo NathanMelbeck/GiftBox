@@ -3,6 +3,7 @@
 namespace gift\app\action;
 
 use gift\app\models\Box;
+use gift\app\services\prestations\BoxService;
 use gift\app\services\Utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -33,15 +34,11 @@ class getNewBoxe
             throw new HttpBadRequestException($request, 'CSRF token error');
         }
 
-        $box = new Box();
-        $box->id = Uuid::uuid4()->toString();
-        $box->token = $token;
-        $box->libelle = $name;
-        $box->description = $description;
-        $box->modele = 0;
-        $box->save();
+        $boxService = new BoxService();
 
-        $_SESSION['BoxCourante'] = $box->id;
+        unset($_SESSION['panier']);
+        $_SESSION['cartTotal'] = 0;
+        $_SESSION['BoxCourante'] = $boxService->createBox($name, $description, $token);;
 
         $data = [
             'name' => $name,

@@ -2,6 +2,7 @@
 
 namespace gift\app\action;
 
+use gift\app\services\prestations\BoxService;
 use gift\app\services\prestations\PrestationService;
 use Slim\Routing\RouteContext;
 
@@ -31,8 +32,11 @@ class supprPanierAction
             $cartTotal += $item['prestation']['tarif'] * $item['quantite'];
         }
 
-        if (isset($_SESSION['utilisateur']) && isset($_SESSION['BoxCourante'])) {
-            var_dump($_SESSION['utilisateur']->email);
+        if (isset($_SESSION['utilisateur'])) {
+            if (isset($_SESSION['BoxCourante'])){
+                $boxService = new BoxService();
+                $boxService->detachPrestationFromBox($_SESSION['BoxCourante'], $prestationId);
+            }
         }
         $_SESSION['cartTotal'] = $cartTotal;
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();

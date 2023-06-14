@@ -3,13 +3,26 @@
 namespace gift\app\action;
 
 use gift\app\services\prestations\BoxService;
+use gift\app\services\Utils\CsrfService;
 use Slim\Routing\RouteContext;
 
 class ajoutPanierBoxAction {
     public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, array $args): \Psr\Http\Message\ResponseInterface {
         $boxId = $args['id'];
-
         $boxService = new BoxService();
+
+        if (isset($_SESSION['BoxCourante']) && $_SESSION['BoxCourante'] != $boxId) {
+            unset($_SESSION['panier']);
+        }
+
+        if ($boxService->estModele($boxId)) {
+            $token = CsrfService::generate();
+            $_SESSION['BoxCourante'] = $boxService->createBox('Votre Box', '', $token);
+        } else {
+            $_SESSION['BoxCourante'] = $boxId;
+        }
+
+
         $box = $boxService->getBoxPrestaById($boxId);
 
         $prestations = $box['presta'];
@@ -44,12 +57,17 @@ class ajoutPanierBoxAction {
             }
         }
 
-        if (isset($_SESSION['utilisateur']) && isset($_SESSION['BoxCourante'])) {
-            var_dump($_SESSION['utilisateur']->email);
+        if (isset($_SESSION['utilisateur'])) {
+            if (isset($_SESSION['BoxCourante'])){
+                $boxService = new BoxService();
+                $boxService->insertBoxPresta($_SESSION['BoxCourante'], $_SESSION['panier']);
+            }
+
         }
         $_SESSION['cartTotal'] = $cartTotal;
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $url = $routeParser->urlFor('panier');
+
         return $response->withHeader('Location', $url)->withStatus(302);
     }
 

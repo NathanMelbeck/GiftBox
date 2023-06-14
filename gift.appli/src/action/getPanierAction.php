@@ -2,6 +2,7 @@
 
 namespace gift\app\action;
 
+use gift\app\services\prestations\BoxService;
 use Slim\Views\Twig;
 
 class getPanierAction {
@@ -9,11 +10,14 @@ class getPanierAction {
 
         $view = Twig::fromRequest($request);
         $data = null;
+        $total = 0;
         if(isset($_SESSION['panier'])){
             $data = $_SESSION['panier'];
         }
+        if(isset($_SESSION['cartTotal'])) $total = $_SESSION['cartTotal'];
+
         return $view->render($response,
-            'panier.twig', ['cartItems' => $_SESSION['panier'], 'cartTotal' => $_SESSION['cartTotal']]
+            'panier.twig', ['cartItems' => $data, 'cartTotal' => $total]
         );
     }
 
