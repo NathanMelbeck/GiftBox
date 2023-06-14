@@ -110,7 +110,7 @@ class PrestationService {
             }
 
             $categorie = new Categorie();
-            var_dump($categ_data);
+
             $categorie->libelle = $categ_data['name'];
             $categorie->description = $categ_data['description'];
             $categorie->save();

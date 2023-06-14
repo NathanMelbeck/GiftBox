@@ -5,13 +5,16 @@ namespace gift\app\conf;
 use gift\app\action\ajoutPanierAction;
 use gift\app\action\getAcceuilAction;
 use gift\app\action\getAuthAction;
+use gift\app\action\GetBoxesAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
+use gift\app\action\getCategoryCreateProcessAction;
 use gift\app\action\getFormAuthAction;
 use gift\app\action\getFormRegisterAction;
 use gift\app\Action\getModeleBoxAction;
 use gift\app\action\getNewBoxe;
 use gift\app\action\getNewBoxeForm;
+use gift\app\action\getNewCategoriesForm;
 use gift\app\action\getPanierAction;
 use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
@@ -43,6 +46,8 @@ return function (\Slim\App $app): void {
         ->setName('prestations');
     $app->get('/boxes', getBoxesAction::class)
         ->setName('boxes');
+    $app->get('/boxe/{id}/', getBoxesDetailAction::class)
+        ->setName('box');
     $app->get('/panier', getPanierAction::class)
         ->setName('panier');
     $app->get('/modeleBox', getModeleBoxAction::class)
@@ -51,6 +56,8 @@ return function (\Slim\App $app): void {
         ->setName('ajouter-panier');
     $app->get('/supprPanier/{id}', supprPanierAction::class)
         ->setName('suprPrestaPanier');
+    $app->post('/ajouter-panier-box/{id}', ajoutPanierBoxAction::class)
+        ->setName('ajouter-panier-box');
 
     //route pour les connections
     $app->get('/connection', getFormAuthAction::class)

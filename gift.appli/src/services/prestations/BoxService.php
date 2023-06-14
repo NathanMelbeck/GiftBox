@@ -12,17 +12,43 @@ class BoxService
             ->get();
     }
 
+    function getBoxPrestaById($id) {
+        $box = Box::find($id);
+
+        if (!$box) {
+            return null;
+        }
+
+        $prestations = $box->possedePrestation()->get();
+
+        $libellePresta = [];
+
+        foreach ($prestations as $prestation) {
+            $libellePresta[] = $prestation;
+        }
+
+        $prestaBox = [
+            'idBox' => $box->id,
+            'libelle' => $box->libelle,
+            'description' => $box->description,
+            'montant' => $box->montant,
+            'presta' => $libellePresta
+        ];
+
+        return $prestaBox;
+    }
+
+
     function getPrestaBoxModele() {
         $prestaBoxArray = [];
 
         foreach ($this->getBoxes() as $box) {
             $prestations = $box->possedePrestation()->get();
-            var_dump($prestations);
+
 
             $libellePresta = [];
 
             foreach ($prestations as $prestation) {
-                var_dump($prestation);
                 $libellePresta[] = $prestation->libelle;
             }
 

@@ -22,7 +22,7 @@ class getRegisterAction {
      */
     public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, array $args): \Psr\Http\Message\ResponseInterface {
         $params = $request->getParsedBody();
-        var_dump($params);
+
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $url = $routeParser->urlFor('categories');
 
