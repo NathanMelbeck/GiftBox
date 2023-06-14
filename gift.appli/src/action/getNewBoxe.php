@@ -4,26 +4,33 @@ namespace gift\app\action;
 
 use gift\app\models\Box;
 use gift\app\services\Utils\CsrfService;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 use Ramsey\Uuid\Uuid;
 
 class getNewBoxe
 {
-    public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response): \Psr\Http\Message\ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
+        if (!$this->isUserAuthenticated()) {
+            $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+            $loginUrl = $routeParser->urlFor('register');
+            return $response->withHeader('Location', $loginUrl)->withStatus(302);
+        }
+
         $params = $request->getParsedBody();
         $name = $params['name'] ?? '';
         $description = $params['description'] ?? '';
-        var_dump($params);
 
         $token = $params['csrf_token'] ?? null;
-        $token2 = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : 'hihi';
 
         try {
             CsrfService::check($token);
         } catch (\Exception $e) {
-            throw new HttpBadRequestException($request, 'csrf token error ' . $token . ' session ' . $token2);
+            throw new HttpBadRequestException($request, 'CSRF token error');
         }
 
         $box = new Box();
@@ -31,7 +38,7 @@ class getNewBoxe
         $box->token = $token;
         $box->libelle = $name;
         $box->description = $description;
-        $box->modele=0;
+        $box->modele = 0;
         $box->save();
 
         $data = [
@@ -39,8 +46,18 @@ class getNewBoxe
             'description' => $description
         ];
 
-        $routeParser = \Slim\Routing\RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('boxes');
-        return $response->withHeader('Location', $url)->withStatus(302);
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'newBox.twig', $data);
     }
+
+    private function isUserAuthenticated(): bool
+    {
+        if (isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']->email) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
