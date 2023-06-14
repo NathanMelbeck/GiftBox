@@ -15,9 +15,9 @@ class ajoutPanierBoxAction {
             unset($_SESSION['panier']);
         }
 
-        if ($boxService->estModele($boxId)) {
+        if ($boxService->estModele($boxId) && isset($_SESSION['utilisateur'])) {
             $token = CsrfService::generate();
-            $_SESSION['BoxCourante'] = $boxService->createBox('Votre Box', '', $token);
+            $_SESSION['BoxCourante'] = $boxService->createBox('Votre Box', '',$_SESSION['utilisateur']->email, $token);
         } else {
             $_SESSION['BoxCourante'] = $boxId;
         }
@@ -65,6 +65,7 @@ class ajoutPanierBoxAction {
 
         }
         $_SESSION['cartTotal'] = $cartTotal;
+        $boxService->updateTotalBox($boxId, $cartTotal);
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $url = $routeParser->urlFor('panier');
 

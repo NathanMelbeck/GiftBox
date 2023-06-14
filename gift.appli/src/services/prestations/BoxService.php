@@ -92,18 +92,24 @@ class BoxService
 
 
 
-    function createBox($name, $description, $token) {
+    function createBox($name, $description, $email,$token) {
         $box = new Box();
         $box->id = Uuid::uuid4()->toString();
         $box->token = $token;
         $box->libelle = $name;
         $box->description = $description;
         $box->modele = 0;
+        $box->email = $email;
         $box->save();
 
         return $box->id;
     }
 
+    function updateTotalBox(mixed $boxId, float|int $cartTotal) {
+        $box = Box::find($boxId);
+        $box->montant = $cartTotal;
+        $box->save();
+    }
 
 
 }
