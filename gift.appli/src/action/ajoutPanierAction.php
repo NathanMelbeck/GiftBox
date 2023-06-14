@@ -2,6 +2,7 @@
 
 namespace gift\app\action;
 
+use gift\app\services\prestations\BoxService;
 use gift\app\services\prestations\PrestationService;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
@@ -43,8 +44,12 @@ class ajoutPanierAction {
             $cartTotal += $item['prestation']['tarif'] * $item['quantite'];
         }
 
-        if (isset($_SESSION['utilisateur']) && isset($_SESSION['BoxCourante'])) {
-            var_dump($_SESSION['utilisateur']->email);
+        if (isset($_SESSION['utilisateur'])) {
+            if (isset($_SESSION['BoxCourante'])){
+                $boxService = new BoxService();
+                $boxService->insertBoxPresta($_SESSION['BoxCourante'], $_SESSION['panier']);
+            }
+
         }
         $_SESSION['cartTotal'] = $cartTotal;
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
