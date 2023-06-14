@@ -41,6 +41,8 @@ class getNewBoxe
         $box->modele = 0;
         $box->save();
 
+        $_SESSION['BoxCourante'] = $box->id;
+
         $data = [
             'name' => $name,
             'description' => $description
@@ -58,6 +60,4 @@ class getNewBoxe
             return false;
         }
     }
-
-
 }
