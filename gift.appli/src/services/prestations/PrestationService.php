@@ -100,8 +100,7 @@ class PrestationService {
         }
     }
 
-    public function addCategorie(array $categ_data): void
-    {
+    public function addCategorie(array $categ_data): void {
         try {
             if ($categ_data['name'] != filter_var($categ_data['name'])) {
                 throw new PrestationServiceBadDataException('Nom invalide');

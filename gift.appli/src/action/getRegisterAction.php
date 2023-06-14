@@ -20,8 +20,9 @@ class getRegisterAction {
     /**
      * @throws injectionException
      */
-    public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response): \Psr\Http\Message\ResponseInterface {
+    public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, array $args): \Psr\Http\Message\ResponseInterface {
         $params = $request->getParsedBody();
+        var_dump($params);
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $url = $routeParser->urlFor('categories');
 
@@ -33,13 +34,12 @@ class getRegisterAction {
             }
         }
         if (!$inject->injectionMail($params['email'])) throw new injectionException('Injection detecté ' . $params['email'] . " hihi");
-        var_dump($params);
+
         $auth = new Auth();
         try {
             $auth->register($params['email'], $params['password'], $params['confirm_password']);
         } catch (mdrException $e) {
-            echo 'password raté cheh salope';
-            $url = $routeParser->urlFor('connection');
+            $url = $routeParser->urlFor('register');
         }
         return $response->withHeader('Location', $url)->withStatus(302);
 

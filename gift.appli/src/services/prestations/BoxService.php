@@ -16,7 +16,8 @@ class BoxService
         $prestaBoxArray = [];
 
         foreach ($this->getBoxes() as $box) {
-            $prestations = $box->possedePrestation();
+            $prestations = $box->possedePrestation()->get();
+            var_dump($prestations);
 
             $libellePresta = [];
 
@@ -35,6 +36,10 @@ class BoxService
         }
 
         return $prestaBoxArray;
+    }
+
+    public function addPresationBox(array $presta_data): void {
+
     }
 
 

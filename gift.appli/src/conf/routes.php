@@ -2,6 +2,7 @@
 
 namespace gift\app\conf;
 
+use gift\app\action\ajoutPanierAction;
 use gift\app\action\getAcceuilAction;
 use gift\app\action\getAuthAction;
 use gift\app\action\getCategorieById;
@@ -16,6 +17,7 @@ use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
 use gift\app\action\GetPrestationsByCategorieAction;
 use gift\app\action\getRegisterAction;
+use gift\app\action\supprPanierAction;
 
 
 return function (\Slim\App $app): void {
@@ -45,6 +47,10 @@ return function (\Slim\App $app): void {
         ->setName('panier');
     $app->get('/modeleBox', getModeleBoxAction::class)
         ->setName('modeleBox');
+    $app->post('/ajouter-panier/{id}', ajoutPanierAction::class)
+        ->setName('ajouter-panier');
+    $app->get('/supprPanier/{id}', supprPanierAction::class)
+        ->setName('suprPrestaPanier');
 
     //route pour les connections
     $app->get('/connection', getFormAuthAction::class)
