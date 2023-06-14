@@ -4,6 +4,7 @@ namespace gift\app\action;
 
 use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
+use Slim\Views\Twig;
 
 class getFormRegisterAction
 {
