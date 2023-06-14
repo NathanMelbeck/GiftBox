@@ -9,12 +9,14 @@ class Auth {
      */
     function authenticate($psswrd, $mail) {
         $user = user::where('email', $mail)->first();
-        if (password_verify($psswrd, $user->passwd)) {
+
+        if ($user && password_verify($psswrd, $user->passwd)) {
             $_SESSION['utilisateur'] = $user;
         } else {
             throw new AuthException();
         }
     }
+
 
     function checkPasswordStrength(string $pass, int $minimumLength): bool {
         $length = (strlen($pass) < $minimumLength); // longueur minimale
