@@ -39,6 +39,22 @@ services:
     depends_on:
       - sql
 
+
+  Api:
+    image: canals/php:latest
+    ports:
+      - "8081:80"
+    volumes :
+        - ./gift.api/public:/var/www/html
+        - ./gift.api/src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - gift-box.net
+    depends_on:
+        - sql
+
+
+
 ## Version pour mettre sur le docketu :
 #version: "3"
 #
