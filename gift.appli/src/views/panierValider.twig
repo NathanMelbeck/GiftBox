@@ -1,0 +1,143 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <div class="cart">
+        <h2 class="cart__title">Votre Panier</h2>
+        <div class="cart__items">
+            {% if cartItems is empty %}
+                <p class="cart__empty">Votre panier est vide.</p>
+            {% else %}
+                {% for item in cartItems %}
+                    <div class="cart__item">
+                        <img src="{{ base_path() }}/img/{{ item.prestation.img }}" alt="{{ item.prestation.libelle }}" class="cart__item-image">
+                        <div class="cart__item-details">
+                            <a href="{{ url_for('prestation', {'id': item.prestation.id},{'id': item.prestation.id}) }}">
+                                <h3 class="cart__item-title">{{ item.prestation.libelle }}</h3>
+                                <p class="cart__item-price">{{ item.prestation.tarif }} €</p>
+                                <div class="cart__item-quantity">
+                                    Qté : {{ item.quantite }}
+                                </div>
+                            </a>
+                        </div>
+                        <div class="cart__item-total">
+                            <p>{{ item.prestation.tarif * item.quantite }} €</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="cart__total">
+            <p class="cart__total-price">Total : {{ cartTotal }} €</p>
+            <form method="POST" action="{{ url_for('paiement') }}" class="mb-4">
+                <label for="gift">Cadeau :</label>
+                <input type="checkbox" name="gift" id="gift">
+                <br>
+                <label for="message">Message pour le cadeau :</label>
+                <textarea name="message" id="message"></textarea>
+                <br>
+                <button type="submit" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+                    Paiement</button>
+            </form>
+        </div>
+    </div>
+    <style>
+        .cart {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 1rem;
+            max-width: 600px;
+        }
+        .cart__title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .cart__empty {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .cart__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 0.25rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart__item-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+        }
+
+        .cart__item-details {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
+
+        .cart__item-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart__item-price,
+        .cart__item-quantity {
+            color: #888;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart__item-quantity select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            background-color: #fff;
+        }
+
+        .cart__item-total {
+            font-weight: bold;
+        }
+
+        .cart__item-delete a {
+            color: #f00;
+            font-size: 0.875rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .cart__total {
+            margin-top: 2rem;
+        }
+
+        .cart__total-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .cart__total input[type="checkbox"],
+        .cart__total textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            background-color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .cart__total form {
+            margin-bottom: 1rem;
+        }
+
+        .cart__total label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+{% endblock %}

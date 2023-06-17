@@ -1,0 +1,27 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <div class="max-w-md mx-auto p-8">
+        <h2 class="text-2xl font-bold mb-6">Saisie des données de paiement</h2>
+        <form method="POST" action="{{ url_for('confirmerPaiement') }}">
+            <div class="mb-4">
+                <label for="numero_carte" class="block font-medium mb-2">Numéro de carte :</label>
+                <input type="text" name="numero_carte" id="numero_carte" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500">
+            </div>
+            <div class="mb-4">
+                <label for="date_expiration" class="block font-medium mb-2">Date d'expiration :</label>
+                <input type="text" name="date_expiration" id="date_expiration" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500">
+            </div>
+            <div class="mb-4">
+                <label for="cvv" class="block font-medium mb-2">CVV :</label>
+                <input type="text" name="cvv" id="cvv" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500">
+            </div>
+
+            <button type="submit" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+                Confirmer le paiement</button>
+        </form>
+    </div>
+{% endblock %}

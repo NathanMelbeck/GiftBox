@@ -10,6 +10,9 @@ use Slim\Views\Twig;
 class ajoutPanierAction {
     public function __invoke(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, array $args): \Psr\Http\Message\ResponseInterface {
         $prestationId = $args['id'];
+        $boxService = new BoxService();
+        $box = null;
+        if (isset($_SESSION['BoxCourante'])) $box = $boxService->getBoxById($_SESSION['BoxCourante']);
 
         $data = $request->getParsedBody();
         $quantity = isset($data['quantity']) ? intval($data['quantity']) : 1;
@@ -34,6 +37,7 @@ class ajoutPanierAction {
             $_SESSION['panier'][$existingPrestationKey]['quantite'] += $quantity;
         } else {
             $_SESSION['panier'][] = [
+                'box' => $box,
                 'prestation' => $prestation,
                 'quantite' => $quantity
             ];
@@ -46,7 +50,7 @@ class ajoutPanierAction {
 
         if (isset($_SESSION['utilisateur'])) {
             if (isset($_SESSION['BoxCourante'])){
-                $boxService = new BoxService();
+
                 $boxService->insertBoxPresta($_SESSION['BoxCourante'], $_SESSION['panier']);
                 $boxService->updateTotalBox($_SESSION['BoxCourante'], $cartTotal);
             }

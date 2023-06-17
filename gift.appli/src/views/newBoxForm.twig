@@ -1,16 +1,55 @@
 {% extends "squelette/main.twig" %}
 
 {% block content %}
-    <form method="POST" action="/boxes/new">
-        <label for="name">Nom de la box :</label>
-        <input type="text" name="name" id="name">
-        <br><br>
-        <label for="description">Description :</label>
-        <textarea name="description" id="description"></textarea>
-        <br><br>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-        <button type="submit">Créer</button>
-    </form>
+<style>
+    form {
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin: 2rem auto;
+        max-width: 400px;
+    }
+    form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    form input[type="text"],
+    form textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+    }
+
+    form button {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #4c51bf;
+        color: #fff;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+    form button:hover {
+        background-color: #4338ca;
+    }
+</style>
+
+<form method="POST" action="/boxes/new" class="bg-violet-300">
+    <label for="name" >Nom de la box :</label>
+    <input type="text" name="name" id="name">
+    <br><br>
+    <label for="description">Description :</label>
+    <textarea name="description" id="description"></textarea>
+    <br><br>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+        Créer</button>
+</form>
 {% endblock %}
-
-

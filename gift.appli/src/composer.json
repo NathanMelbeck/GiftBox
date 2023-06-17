@@ -11,8 +11,13 @@
   },
   "autoload": {
     "psr-4": {
-      "gift\\app\\": "./"
+      "gift\\app\\": "./",
+      "gift\\test\\": "../tests"
     }
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }
+
 

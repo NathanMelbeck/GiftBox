@@ -22,7 +22,9 @@ use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
 use gift\app\action\GetPrestationsByCategorieAction;
 use gift\app\action\getRegisterAction;
+use gift\app\action\paiementPanierAction;
 use gift\app\action\supprPanierAction;
+use gift\app\action\validerPanierAction;
 
 
 return function (\Slim\App $app): void {
@@ -60,6 +62,12 @@ return function (\Slim\App $app): void {
         ->setName('suprPrestaPanier');
     $app->post('/ajouter-panier-box/{id}', ajoutPanierBoxAction::class)
         ->setName('ajouter-panier-box');
+    $app->get('/validerPanier', validerPanierAction::class)
+        ->setName('validerPanier');
+    $app->post('/paiement', paiementPanierAction::class)
+        ->setName('paiement');
+    $app->post('/ConfirmPaiement', paiementPanierAction::class)
+        ->setName('confirmerPaiement');
 
     //route pour les connections
     $app->get('/connection', getFormAuthAction::class)

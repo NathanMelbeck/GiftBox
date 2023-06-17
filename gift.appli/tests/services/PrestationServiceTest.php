@@ -1,13 +1,15 @@
 <?php
 declare(strict_types=1);
-
-namespace gift\test\services\prestations;
+namespace gift\test\service;
 
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
 use gift\app\services\prestations\PrestationService;
+
+use Illuminate\Database\Capsule\Manager as DB;
+
 use \PHPUnit\Framework\TestCase;
-use Illuminate\Database\Capsule\Manager as DB ;
+require_once __DIR__.'/../../src/vendor/autoload.php';
 
 final class PrestationServiceTest extends TestCase
 {
@@ -19,11 +21,11 @@ final class PrestationServiceTest extends TestCase
         parent::setUpBeforeClass();
 
         $db = new DB();
-        $db->addConnection(parse_ini_file(__DIR__ . '/../../../src/conf/gift.db.test.ini'));
+        $db->addConnection(parse_ini_file(__DIR__ . '/../../src/conf/gift.db.conf.ini'));
         $db->setAsGlobal();
         $db->bootEloquent();
         $faker = \Faker\Factory::create('fr_FR');
-
+        //$prestaService =
         $c1= Categorie::addCategorie([
             'name' => $faker->word(),
             'description' => $faker->paragraph(3)
