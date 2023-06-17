@@ -46,6 +46,7 @@ class ajoutPanierBoxAction {
                 $_SESSION['panier'][$existingPrestationKey]['quantite'] += $quantity;
             } else {
                 $_SESSION['panier'][] = [
+                    'box' => $box,
                     'prestation' => $prestation,
                     'quantite' => $quantity
                 ];

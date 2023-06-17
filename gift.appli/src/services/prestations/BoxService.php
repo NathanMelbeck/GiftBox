@@ -21,20 +21,16 @@ class BoxService
             return null;
         }
 
-        $prestations = $box->possedePrestation()->get();
+        $prestations = $box->possedePrestation()->get()->toArray();
 
-        $libellePresta = [];
-
-        foreach ($prestations as $prestation) {
-            $libellePresta[] = $prestation;
-        }
 
         $prestaBox = [
             'idBox' => $box->id,
             'libelle' => $box->libelle,
             'description' => $box->description,
             'montant' => $box->montant,
-            'presta' => $libellePresta
+            'statut' => $box->statut,
+            'presta' => $prestations
         ];
 
         return $prestaBox;
@@ -64,6 +60,7 @@ class BoxService
                 'libelle' => $box->libelle,
                 'description' => $box->description,
                 'montant' => $box->montant,
+                'statut' => $box->statut,
                 'libellePresta' => $libellePresta
             ];
         }
@@ -108,6 +105,29 @@ class BoxService
     function updateTotalBox(mixed $boxId, float|int $cartTotal) {
         $box = Box::find($boxId);
         $box->montant = $cartTotal;
+        $box->save();
+    }
+
+    public function getBoxById(mixed $id)
+    {
+        return Box::find($id);
+    }
+
+    function statut($id, $num){
+        $box = Box::find($id);
+        $box->statut = $num;
+        $box->save();
+    }
+
+    function sauvegarderDonneesBox($id, $gift, $message) {
+        // Recherche de la box dans la base de données
+        $box = Box::find($id);
+
+        // Mise à jour des données de la box
+        $box->kdo = $gift;
+        $box->message_kdo = $message;
+
+        // Sauvegarde des modifications
         $box->save();
     }
 
