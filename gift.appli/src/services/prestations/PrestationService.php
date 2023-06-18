@@ -4,6 +4,7 @@ namespace gift\app\services\prestations;
 
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
+use gift\app\models\user;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -11,6 +12,22 @@ class PrestationService {
 
     public function getCategories(): array{
         return Categorie::all()->toArray();
+    }
+    public function getUser($email): array{
+        return User::all()->toArray();
+    }
+    public function updateUserProfile($email, $name, $prenom, $telephone) {
+        // Récupérer l'utilisateur actuel depuis la session
+        $user = User::find($email);
+
+        // Mettre à jour les informations du profil
+        $user->nomUser = $name;
+        $user->prenomUser = $prenom;
+        $user->tel = $telephone;
+
+        // Enregistrer les modifications dans la base de données
+        $user->save();
+        return $user;
     }
 
     public function getPrestations($asc): array{

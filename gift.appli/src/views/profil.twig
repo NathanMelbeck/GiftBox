@@ -1,0 +1,45 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+        <div style="display: flex; gap: 2rem;">
+            <div class="shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4">
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Mes Boxes</h2>
+                <div class="boxes">
+                    {% if boxes is empty %}
+                        <p>Vous n'avez aucune box pour le moment.</p>
+                    {% else %}
+                        <ul style="list-style-type: disc; margin-left: 2rem;">
+                            {% for box in boxes %}
+                                <li>
+                                    <a href="{{ url_for('box', {'id': box.id}) }}" style="color: black; text-decoration: underline;">{{ box.libelle }}</a>
+                                    {% if box.statut == 3 %}
+                                        <a href="{{ url_for('genererUrl', {'id': box.id}) }}" style="color: green; margin-left: 1rem;">Générer une URL</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4">
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-top: 1rem; margin-bottom: 1rem;">Modifier mes informations personnelles</h2>
+                <form method="POST" action="{{ url_for('profilChange') }}" style="margin-bottom: 1rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Nom :</label>
+                    <input type="text" name="name" id="name" value="{{ user.nomUser }}" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 0.25rem; margin-bottom: 0.5rem;">
+                    <label for="prenom" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Prénom :</label>
+                    <input type="text" name="prenom" id="prenom" value="{{ user.prenomUser }}" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 0.25rem; margin-bottom: 0.5rem;">
+                    <label for="telephone" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Téléphone :</label>
+                    <input type="tel" name="telephone" id="telephone" value="{{ user.tel }}" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 0.25rem; margin-bottom: 0.5rem;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <button type="submit" class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500">
+                        Enregistrer les modifications</button>
+                </form>
+
+                <a href="{{ url_for('logout') }}" class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500">
+                    Déconnexion</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

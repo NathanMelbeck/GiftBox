@@ -38,7 +38,7 @@ class getNewBoxe
 
         unset($_SESSION['panier']);
         $_SESSION['cartTotal'] = 0;
-        $_SESSION['BoxCourante'] = $boxService->createBox($name, $description, $_SESSION['utilisateur'],$token);;
+        $_SESSION['BoxCourante'] = $boxService->createBox($name, $description, $_SESSION['utilisateur']->email ,$token);;
 
         $data = [
             'name' => $name,
