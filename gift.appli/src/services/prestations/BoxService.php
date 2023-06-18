@@ -136,4 +136,25 @@ class BoxService
             ->get()->toArray();
     }
 
+    function getBoxByToken($token){
+        $box = Box::where('token', $token)
+            ->first();
+        if (!$box) {
+            return null;
+        }
+
+        $prestations = $box->possedePrestation()->get()->toArray();
+
+
+        $prestaBox = [
+            'idBox' => $box->id,
+            'libelle' => $box->libelle,
+            'description' => $box->description,
+            'montant' => $box->montant,
+            'statut' => $box->statut,
+            'presta' => $prestations
+        ];
+
+        return $prestaBox;
+    }
 }

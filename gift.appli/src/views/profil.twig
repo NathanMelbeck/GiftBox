@@ -1,7 +1,25 @@
 {% extends "squelette/main.twig" %}
 
 {% block content %}
+
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+        {% if url is defined %}
+            <div class="url-container shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4 my-4">
+                <table>
+
+                    <td>
+                        <input type="text" id="url-input" value="{{ url }}" readonly>
+                    </td>
+                    <td>
+                        <button id="copy-button" class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500"
+                                data-clipboard-target="#url-input">Copier</button>
+                    </td>
+
+                </table>
+                </td>
+            </div>
+        {% endif %}
+
         <div style="display: flex; gap: 2rem;">
             <div class="shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4">
                 <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Mes Boxes</h2>
@@ -42,4 +60,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script>
+        new ClipboardJS('#copy-button');
+    </script>
 {% endblock %}
