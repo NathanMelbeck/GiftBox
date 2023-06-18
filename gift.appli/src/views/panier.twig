@@ -108,7 +108,7 @@
                         </div>
                         {% if cartItems.statut == 1 %}
                             <div class="cart__item-delete mx-4">
-                                <a href="{{ url_for('suprPrestaPanier', {'id': item.prestation.id}) }}">Supprimer</a>
+                                <a href="{{ url_for('suprPrestaPanier', {'id': item.id}) }}">Supprimer</a>
                             </div>
                         {% endif %}
                     </div>

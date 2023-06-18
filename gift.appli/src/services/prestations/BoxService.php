@@ -131,5 +131,9 @@ class BoxService
         $box->save();
     }
 
+    function getBoxesUser($email){
+        return Box::where('email', $email)
+            ->get()->toArray();
+    }
 
 }

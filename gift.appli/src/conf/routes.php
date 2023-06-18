@@ -9,6 +9,7 @@ use gift\app\action\GetBoxesAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
 use gift\app\action\getCategoryCreateProcessAction;
+use gift\app\action\getDeconnexionAction;
 use gift\app\action\getFormAuthAction;
 use gift\app\action\getFormRegisterAction;
 use gift\app\Action\getModeleBoxAction;
@@ -19,9 +20,11 @@ use gift\app\action\getPanierAction;
 use gift\app\action\getPrestation;
 use gift\app\action\getPrestationsAction;
 use gift\app\action\GetPrestationsByCategorieAction;
+use gift\app\action\getProfilAction;
 use gift\app\action\getRegisterAction;
 use gift\app\action\paiementPanierAction;
 use gift\app\action\postcartePaiement;
+use gift\app\action\postProfilAction;
 use gift\app\action\supprPanierAction;
 use gift\app\action\validerPanierAction;
 
@@ -79,4 +82,10 @@ return function (\Slim\App $app): void {
         ->setName('register');
     $app->post('/register', getRegisterAction::class)
         ->setName('register');
+    $app->get('/profil', getProfilAction::class)
+        ->setName('profil');
+    $app->post('/profil', postProfilAction::class)
+        ->setName("profilChange");
+    $app->get('/users/deconnexion', getDeconnexionAction::class)
+        ->setName('logout');
 };
