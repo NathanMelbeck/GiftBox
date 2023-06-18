@@ -15,11 +15,15 @@
             {% endfor %}
             </div>
             <hr class="my-4">
-            <form method="post" action="{{ url_for('ajouter-panier-box', {'id': box.idBox}) }}">
-                <button class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
-                    Ajouter au panier
-                </button>
-            </form>
+            {% if box.statut == 4 or box.statut == 5%}
+                    <p>coffret déjà payé</p>
+                {% else %}
+                    <form method="post" action="{{ url_for('ajouter-panier-box', {'id': box.idBox}) }}">
+                        <button class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+                            Ajouter au panier
+                        </button>
+                    </form>
+            {% endif %}
 
 
         </div>

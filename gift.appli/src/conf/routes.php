@@ -3,9 +3,11 @@
 namespace gift\app\conf;
 
 use gift\app\action\ajoutPanierAction;
+use gift\app\action\ajoutPanierBoxAction;
 use gift\app\action\getAcceuilAction;
 use gift\app\action\getAuthAction;
 use gift\app\action\GetBoxesAction;
+use gift\app\action\getBoxesDetailAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
 use gift\app\action\getCategoryCreateProcessAction;
@@ -72,6 +74,10 @@ return function (\Slim\App $app): void {
         ->setName('confirmerPaiement');
     $app->post('/cartePaiement', postcartePaiement::class)
         ->setName('cartePaiement');
+    $app->get('/genererUrl/{id}', genererUrlAction::class)
+        ->setName('genererUrl');
+    $app->get('/coffret/{token}', getBoxKdoAction::class)
+        ->setName('coffretKdo');
 
     //route pour les connections
     $app->get('/connection', getFormAuthAction::class)

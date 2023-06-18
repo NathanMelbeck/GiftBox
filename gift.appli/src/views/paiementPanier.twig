@@ -3,7 +3,7 @@
 {% block content %}
     <div class="max-w-md mx-auto p-8">
         <h2 class="text-2xl font-bold mb-6">Saisie des données de paiement</h2>
-        <form method="POST" action="{{ url_for('confirmerPaiement') }}">
+        <form method="POST" action="{{ url_for('cartePaiement') }}">
             <div class="mb-4">
                 <label for="numero_carte" class="block font-medium mb-2">Numéro de carte :</label>
                 <input type="text" name="numero_carte" id="numero_carte" required
@@ -20,7 +20,7 @@
                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500">
             </div>
 
-            <button href="{{ url_for('cartePaiement') }}" type="submit" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+            <button type="submit" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
                 Confirmer le paiement</button>
         </form>
     </div>
