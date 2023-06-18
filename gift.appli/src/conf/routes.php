@@ -4,10 +4,12 @@ namespace gift\app\conf;
 
 use gift\app\action\ajoutPanierAction;
 use gift\app\action\ajoutPanierBoxAction;
+use gift\app\action\genererUrlAction;
 use gift\app\action\getAcceuilAction;
 use gift\app\action\getAuthAction;
 use gift\app\action\GetBoxesAction;
 use gift\app\action\getBoxesDetailAction;
+use gift\app\action\getBoxKdoAction;
 use gift\app\action\getCategorieById;
 use gift\app\action\getCategoriesAction;
 use gift\app\action\getCategoryCreateProcessAction;
