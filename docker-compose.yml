@@ -54,47 +54,62 @@ services:
         - sql
 
 
+# Version pour mettre sur le docketu :
+version: "3"
 
-## Version pour mettre sur le docketu :
-#version: "3"
-#
-#networks:
-#  gift-box.net:
-#    driver: bridge
-#
-#services:
-#  sql:
-#    image: mariadb:latest
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-#      - MYSQL_USER=${DB_USER_NAME}
-#      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
-#      - MYSQL_DATABASE=${DB_USER_NAME}
-#    networks:
-#      gift-box.net:
-#        aliases:
-#          - sql.db
-#
-#  adminer:
-#    image: adminer
-#    ports:
-#      - "10100:8080"
-#    networks:
-#      - gift-box.net
-#
-#  php:
-#    image: canals/php:latest
-#    ports:
-#      - "50800:80"
-#    volumes :
-#      - ./gift.appli/public:/var/www/html
-#      - ./shared/img:/var/www/html/img
-#      - ./gift.appli/src:/var/www/src
-#    working_dir: /var/www/src
-#    networks:
-#      - gift-box.net
-#    depends_on:
-#      - sql
-#    environment:
-#      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
-#      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+networks:
+  gift-box-docketeu.net:
+    driver: bridge
+
+services:
+  sql:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER_NAME}
+      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
+      - MYSQL_DATABASE=${DB_USER_NAME}
+    networks:
+      gift-box-docketeu.net:
+        aliases:
+          - sql.db
+
+  adminer:
+    image: adminer
+    ports:
+      - "60100:8080"
+    networks:
+      - gift-box-docketeu.net
+
+  php:
+    image: canals/php:latest
+    ports:
+      - "60800:80"
+    volumes :
+      - ./gift.appli/public:/var/www/html
+      - ./shared/img:/var/www/html/img
+      - ./gift.appli/src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - gift-box-docketeu.net
+    depends_on:
+      - sql
+    environment:
+      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+
+  Api:
+    image: canals/php:latest
+    ports:
+      - "60810:80"
+    volumes :
+      - ./gift.api/public:/var/www/html
+      - ./gift.api/src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - gift-box-docketeu.net
+    depends_on:
+      - sql
+    environment:
+      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
