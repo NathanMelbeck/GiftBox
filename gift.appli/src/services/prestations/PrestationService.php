@@ -4,6 +4,7 @@ namespace gift\app\services\prestations;
 
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
+use gift\app\models\user;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -11,6 +12,22 @@ class PrestationService {
 
     public function getCategories(): array{
         return Categorie::all()->toArray();
+    }
+    public function getUser($email): array{
+        return User::all()->toArray();
+    }
+    public function updateUserProfile($email, $name, $prenom, $telephone) {
+        // Récupérer l'utilisateur actuel depuis la session
+        $user = User::find($email);
+
+        // Mettre à jour les informations du profil
+        $user->nomUser = $name;
+        $user->prenomUser = $prenom;
+        $user->tel = $telephone;
+
+        // Enregistrer les modifications dans la base de données
+        $user->save();
+        return $user;
     }
 
     public function getPrestations($asc): array{
@@ -100,12 +117,25 @@ class PrestationService {
         }
     }
 
-    public function addCategorie() : int {
-        $categorie = new Categorie();
-        $categorie->libelle = 'Nouvelle catégorie';
-        $categorie->save();
-        return $categorie->id;
+    public function addCategorie(array $categ_data): void {
+        try {
+            if ($categ_data['name'] != filter_var($categ_data['name'])) {
+                throw new PrestationServiceBadDataException('Nom invalide');
+            }
+            if ($categ_data['description'] != filter_var($categ_data['description'])) {
+                throw new PrestationServiceBadDataException('Description invalide');
+            }
+
+            $categorie = new Categorie();
+
+            $categorie->libelle = $categ_data['name'];
+            $categorie->description = $categ_data['description'];
+            $categorie->save();
+        } catch (ModelNotFoundException $exception) {
+            throw new PrestationNotFoundException('Categorie non trouvée', 404);
+        }
     }
+
 
     /**
      * @throws PrestationNotFoundException

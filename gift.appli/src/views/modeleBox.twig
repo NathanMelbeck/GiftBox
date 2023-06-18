@@ -1,0 +1,33 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <div class="container mx-auto">
+        <div class="grid grid-cols-3 gap-4">
+            {% for box in boxes %}
+                <div class="shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4">
+                    <h2 class="text-lg font-bold">{{ box.libelle }}</h2>
+                    <hr><br>
+                    <p>{{ box.description }}</p>
+                    <br>
+                    <div class="flex-grow font-medium">Ce qu'elle contient :</div>
+                    {% for presta in box.libellePresta %}
+                        <li> {{ presta }}</li>
+                    {% endfor %}
+                    <br>
+                    <div class="bottom">
+                        <hr>
+                        <p>Livraison gratuite</p>
+                        <p>{{ box.montant }}€</p>
+                    </div>
+                    <a href="{{ url_for('box', {'id': box.idBox}) }}" class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500">
+                        Détail
+                    </a>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    <style>.bottom {
+            margin-top: auto;
+        }</style>
+{% endblock %}

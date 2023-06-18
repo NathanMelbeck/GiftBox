@@ -1,16 +1,26 @@
 <?php
 
-session_start();
+namespace gift\app\services\Utils;
 
-$token = CsrfService::generate();
+class CsrfService
+{
+    public static function generate(): string
+    {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $token;
+        return $token;
+    }
 
-echo '<input type="hidden" name="csrf_token" value="' . $token . '">';
+    public static function check(string $token): void
+    {
+        if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $token) {
+            throw new \Exception('Erreur CSRF : Token invalide');
+        }
+    }
 
-if (isset($_POST['csrf_token'])) {
-    $submittedToken = $_POST['csrf_token'];
-    try {
-        CsrfService::check($submittedToken);
-    } catch (\Exception $e) {
-        echo 'Erreur CSRF : ' . $e->getMessage();
+    public static function getTokenInputField(): string
+    {
+        $token = self::generate();
+        return '<input type="hidden" name="csrf_token" value="' . $token . '">';
     }
 }

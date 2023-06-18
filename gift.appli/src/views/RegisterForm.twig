@@ -1,7 +1,18 @@
 {% extends "squelette/main.twig" %}
 
 {% block content %}
-    <fieldset class="bg-violet-300 mx-8 my-4 p-4 rounded-lg">
+    <fieldset class="bg-violet-300 mx-8 my-4 p-4 rounded-lg" style="margin: 2rem auto;
+        padding: 1rem;
+        max-width: 600px;">
+        {% if errors|length > 0 %}
+            <div>
+                <ul>
+                    {% for error in errors %}
+                        <p class="font-bold text-center" style="color: red">{{ error }}</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         <form method="POST" action="/register">
             <table class="my-4">
                 <tr>
@@ -38,7 +49,6 @@
             <button class="bg-violet-400 mx-8 my-4 p-4 rounded-lg" type="submit">S'enregistrer</button>
         </form>
     </fieldset>
-
 {% endblock %}
 
 

@@ -9,12 +9,14 @@ class Auth {
      */
     function authenticate($psswrd, $mail) {
         $user = user::where('email', $mail)->first();
-        if (password_verify($psswrd, $user->passwd)) {
+
+        if ($user && password_verify($psswrd, $user->passwd)) {
             $_SESSION['utilisateur'] = $user;
         } else {
             throw new AuthException();
         }
     }
+
 
     function checkPasswordStrength(string $pass, int $minimumLength): bool {
         $length = (strlen($pass) < $minimumLength); // longueur minimale
@@ -26,11 +28,11 @@ class Auth {
     }
 
     /**
-     * @throws mdrException
+     * @throws mdpException
      */
     function register($email, string $mdp1, string $mdp2, $login = "", $nom = "", $prenom = "", $tel = ""){
         if($mdp1 != $mdp2 || !$this->checkPasswordStrength($mdp1, 8)){
-            throw new mdrException();
+            throw new mdpException();
         } else if (!$this->dejaPresent($email)){
             $user = new user();
 

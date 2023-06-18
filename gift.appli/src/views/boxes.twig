@@ -1,0 +1,37 @@
+{% extends "squelette/main.twig" %}
+
+{% block content %}
+    <style>
+        .rectangle {
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        .rectangle h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+    </style>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="rectangle bg-violet-300" >
+                <h2>Choisir un coffret existant</h2>
+                <a href="{{ url_for('modeleBox') }}" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+                    Sélectionner</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="rectangle bg-violet-300">
+                <h2>Créer un coffret vide</h2>
+                <a href="{{ url_for('newBoxesForm') }}" class="block shadow rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-300 hover:to-indigo-500 text-center">
+                    Créer</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -24,27 +24,7 @@
     </div>
     <div class="my-4 grid grid-cols-3 gap-4 px-4">
         {% for prestation in prestations %}
-            <div class="shadow-2xl bg-violet-300 rounded-lg p-4 flex flex-col px-4">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <h2 class="text-lg font-bold">{{ prestation.libelle }}</h2>
-                        <p>{{ prestation.tarif }}€</p>
-                        <p>{{ prestation.categorie }}</p>
-                    </div>
-                </div>
-                <img src="{{ base_path() }}/img/{{ prestation.img }}" alt="{{ prestation.description }}" class="w-full h-auto mt-4">
-                <p class="mt-4">{{ prestation.description }}</p>
-                <a href="{{ url_for('prestation', {'id': prestation.id},{'id': prestation.id}) }}" class="block rounded-2xl p-1 px-3 font-medium block mx-2 mt-5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center hover:from-purple-300 hover:to-indigo-500">
-                    Détail
-                </a>
-            </div>
+            {% include 'prestation_card.twig' %}
         {% endfor %}
     </div>
-    <style>
-        .shadow-2xl:hover {
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-    </style>
-
-
 {% endblock %}

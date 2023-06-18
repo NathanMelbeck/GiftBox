@@ -2,6 +2,6 @@
 
 namespace gift\app\services\Auth;
 
-class mdrException extends \Exception {
+class mdpException extends \Exception {
 
 }

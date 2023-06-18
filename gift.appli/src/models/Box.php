@@ -12,8 +12,7 @@ class Box extends Eloq\Model{
     public $keyType = 'string';
 
     function possedePrestation(){
-        return $this->belongsToMany(Prestation::class, 'box2presta',
-            'box_id', 'presta_id')
+        return $this->belongsToMany(Prestation::class, 'box2presta', 'box_id', 'presta_id')
             ->withPivot('quantite');
     }
     
